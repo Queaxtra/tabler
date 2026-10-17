@@ -1,0 +1,174 @@
+{
+	"app": {
+		"name": "Tabler"
+	},
+	"common": {
+		"cancel": "Cancel",
+		"close": "Close",
+		"download": "Download",
+		"clear": "Clear",
+		"save": "Save",
+		"delete": "Delete",
+		"null": "NULL"
+	},
+	"footer": {
+		"description": "Query CSV, Excel, Parquet, and JSON with SQL in your browser.",
+		"source": "Source on GitHub"
+	},
+	"hero": {
+		"theme": "Toggle theme",
+		"repository": "GitHub repository",
+		"profile": "X profile",
+		"shortcuts": "Shortcuts",
+		"shortcutsAria": "Keyboard shortcuts",
+		"language": "Language"
+	},
+	"dropZone": {
+		"add": "Add files",
+		"drop": "Drop to load",
+		"loading": "Loading…"
+	},
+	"sources": {
+		"exportSession": "Export session",
+		"importSession": "Import session",
+		"resetDatabase": "Reset database",
+		"files": "Files",
+		"tables": "Tables",
+		"deleteCount": "Delete {count}",
+		"hint": "Click a file to open its editor, right-click for query and delete. To sort, filter, view statistics or export rows, run a query instead.",
+		"filterPlaceholder": "Filter files",
+		"clearFilter": "Clear filter",
+		"noMatch": "No files match \"{term}\"",
+		"selectFile": "Select {name}",
+		"fileTitle": "Click to edit, right-click for actions",
+		"runQuery": "Run query",
+		"editTable": "Edit table",
+		"deleteFile": "Delete file",
+		"deleteSelected": "Delete {count} selected"
+	},
+	"editor": {
+		"run": "Run query",
+		"clear": "Clear",
+		"history": "History",
+		"recent": "Recent queries",
+		"historyEmpty": "Queries you run show up here.",
+		"addFavourite": "Add favourite",
+		"removeFavourite": "Remove favourite",
+		"autocomplete": "Autocomplete suggestions",
+		"runWith": "Run with",
+		"placeholder": "SELECT * FROM table_name LIMIT 100;"
+	},
+	"results": {
+		"rows": "{count} rows",
+		"clearRefinements": "Clear refinements",
+		"truncated": "first 2000 rows shown",
+		"searchPlaceholder": "Search all rows",
+		"clearSearch": "Clear search",
+		"statistics": "Statistics",
+		"statisticsShort": "Stats",
+		"export": "Export",
+		"copy": "Copy CSV",
+		"copied": "Copied",
+		"emptyMatchTitle": "No matching rows",
+		"emptyMatchBody": "Nothing matches the current search or filters.",
+		"emptyTitle": "No rows returned",
+		"emptyBody": "The query returned no rows.",
+		"sortColumn": "Sort by this column",
+		"filterColumn": "Filter column",
+		"filterValue": "Filter value",
+		"clearFilter": "Clear filter",
+		"idleTitle": "No results yet",
+		"idleBody": "Load a file, then run a query to see rows. Sorting, filters, statistics and export become available on a query result.",
+		"rowTitle": "Row {number}",
+		"rowDescription": "Every column value for this row.",
+		"queryFailed": "Query failed"
+	},
+	"statistics": {
+		"title": "Column statistics",
+		"description": "Summary computed by DuckDB for every column in the current query.",
+		"errorTitle": "Could not summarize",
+		"loading": "Summarizing",
+		"empty": "Nothing to summarize."
+	},
+	"export": {
+		"title": "Export result",
+		"description": "Download the current query result as a file.",
+		"format": "Format",
+		"excel": "Excel (xlsx)",
+		"errorTitle": "Export failed"
+	},
+	"addColumn": {
+		"title": "Add column",
+		"description": "New columns are appended to the table.",
+		"name": "Name",
+		"namePlaceholder": "column_name",
+		"duplicate": "A column with this name already exists.",
+		"type": "Type",
+		"submit": "Add column"
+	},
+	"dataEditor": {
+		"pendingChange": "{count} pending change",
+		"pendingChanges": "{count} pending changes",
+		"saved": "saved",
+		"undo": "Undo",
+		"redo": "Redo",
+		"addRow": "Add row",
+		"addColumn": "Add column",
+		"discard": "Discard",
+		"saveFirst": "Save changes first",
+		"downloadTable": "Download the table",
+		"close": "Close editor",
+		"errorTitle": "Could not update the table",
+		"loading": "Loading table",
+		"noColumns": "No columns to edit",
+		"selectAll": "Select all rows",
+		"selectRow": "Select row",
+		"deleteRow": "Delete row",
+		"renameHint": "Double-click to rename",
+		"editHint": "Double-click a cell to edit, or move with the arrow keys and press Enter.",
+		"editorHint": "This is the editor. To sort, filter, view statistics or export rows, run a query in the SQL box above.",
+		"truncated": "Showing the first {shown} of {total} rows. Only loaded rows can be edited.",
+		"sqliteNote": "SQLite downloads as CSV, because the browser engine cannot write SQLite files."
+	},
+	"tableExplorer": {
+		"empty": "No tables loaded",
+		"expand": "Expand columns",
+		"collapse": "Collapse columns",
+		"preview": "Preview this table"
+	},
+	"page": {
+		"engineError": "Engine error",
+		"unsupportedFiles": "Unsupported files",
+		"confirmReset": "Drop every table in the database? This cannot be undone."
+	},
+	"shortcuts": {
+		"title": "Keyboard shortcuts",
+		"description": "Work without leaving the keyboard.",
+		"group": {
+			"query": "Query",
+			"data": "Data",
+			"results": "Results",
+			"general": "General"
+		},
+		"runQuery": "Run query",
+		"focusEditor": "Focus SQL editor",
+		"openFiles": "Open files",
+		"focusFiles": "Focus file filter",
+		"focusFilter": "Focus row filter",
+		"undoEdit": "Undo edit",
+		"redoEdit": "Redo edit",
+		"showShortcuts": "Show shortcuts",
+		"blurField": "Blur active field"
+	},
+	"errors": {
+		"unsupportedFileType": "unsupported file type",
+		"unsupportedFileKind": "unsupported file kind: {kind}",
+		"engineNotInitialized": "database engine is not initialized",
+		"notSessionArchive": "this zip is not a session archive",
+		"unreadableManifest": "the session manifest is not readable",
+		"notZip": "not a zip archive",
+		"corruptZip": "corrupt zip directory",
+		"unsupportedCompression": "unsupported zip compression method: {method}",
+		"workerBundle": "duckdb worker bundle is not available"
+	}
+}

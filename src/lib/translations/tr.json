@@ -1,0 +1,174 @@
+{
+	"app": {
+		"name": "Tabler"
+	},
+	"common": {
+		"cancel": "İptal",
+		"close": "Kapat",
+		"download": "İndir",
+		"clear": "Temizle",
+		"save": "Kaydet",
+		"delete": "Sil",
+		"null": "NULL"
+	},
+	"footer": {
+		"description": "CSV, Excel, Parquet ve JSON dosyalarını tarayıcınızda SQL ile sorgulayın.",
+		"source": "Kaynak kod GitHub'da"
+	},
+	"hero": {
+		"theme": "Temayı değiştir",
+		"repository": "GitHub deposu",
+		"profile": "X profili",
+		"shortcuts": "Kısayollar",
+		"shortcutsAria": "Klavye kısayolları",
+		"language": "Dil"
+	},
+	"dropZone": {
+		"add": "Dosya ekle",
+		"drop": "Yüklemek için bırak",
+		"loading": "Yükleniyor…"
+	},
+	"sources": {
+		"exportSession": "Oturumu dışa aktar",
+		"importSession": "Oturumu içe aktar",
+		"resetDatabase": "Veritabanını sıfırla",
+		"files": "Dosyalar",
+		"tables": "Tablolar",
+		"deleteCount": "{count} tanesini sil",
+		"hint": "Düzenleyiciyi açmak için bir dosyaya tıklayın, sorgu ve silme için sağ tıklayın. Sıralamak, filtrelemek, istatistik görmek veya satırları dışa aktarmak için bunun yerine sorgu çalıştırın.",
+		"filterPlaceholder": "Dosyaları filtrele",
+		"clearFilter": "Filtreyi temizle",
+		"noMatch": "\"{term}\" ile eşleşen dosya yok",
+		"selectFile": "{name} seç",
+		"fileTitle": "Düzenlemek için tıklayın, işlemler için sağ tıklayın",
+		"runQuery": "Sorgu çalıştır",
+		"editTable": "Tabloyu düzenle",
+		"deleteFile": "Dosyayı sil",
+		"deleteSelected": "Seçili {count} tanesini sil"
+	},
+	"editor": {
+		"run": "Sorgu çalıştır",
+		"clear": "Temizle",
+		"history": "Geçmiş",
+		"recent": "Son sorgular",
+		"historyEmpty": "Çalıştırdığınız sorgular burada görünür.",
+		"addFavourite": "Favorilere ekle",
+		"removeFavourite": "Favorilerden çıkar",
+		"autocomplete": "Otomatik tamamlama önerileri",
+		"runWith": "Çalıştırma",
+		"placeholder": "SELECT * FROM table_name LIMIT 100;"
+	},
+	"results": {
+		"rows": "{count} satır",
+		"clearRefinements": "Daraltmaları temizle",
+		"truncated": "ilk 2000 satır gösteriliyor",
+		"searchPlaceholder": "Tüm satırlarda ara",
+		"clearSearch": "Aramayı temizle",
+		"statistics": "İstatistikler",
+		"statisticsShort": "Özet",
+		"export": "Dışa aktar",
+		"copy": "CSV kopyala",
+		"copied": "Kopyalandı",
+		"emptyMatchTitle": "Eşleşen satır yok",
+		"emptyMatchBody": "Mevcut arama veya filtrelerle eşleşen bir şey yok.",
+		"emptyTitle": "Satır dönmedi",
+		"emptyBody": "Sorgu hiç satır döndürmedi.",
+		"sortColumn": "Bu sütuna göre sırala",
+		"filterColumn": "Sütunu filtrele",
+		"filterValue": "Filtre değeri",
+		"clearFilter": "Filtreyi temizle",
+		"idleTitle": "Henüz sonuç yok",
+		"idleBody": "Bir dosya yükleyin, ardından satırları görmek için sorgu çalıştırın. Sıralama, filtreler, istatistikler ve dışa aktarma bir sorgu sonucunda kullanılabilir olur.",
+		"rowTitle": "Satır {number}",
+		"rowDescription": "Bu satırdaki her sütun değeri.",
+		"queryFailed": "Sorgu başarısız"
+	},
+	"statistics": {
+		"title": "Sütun istatistikleri",
+		"description": "Mevcut sorgudaki her sütun için DuckDB tarafından hesaplanan özet.",
+		"errorTitle": "Özet çıkarılamadı",
+		"loading": "Özetleniyor",
+		"empty": "Özetlenecek bir şey yok."
+	},
+	"export": {
+		"title": "Sonucu dışa aktar",
+		"description": "Mevcut sorgu sonucunu dosya olarak indirin.",
+		"format": "Biçim",
+		"excel": "Excel (xlsx)",
+		"errorTitle": "Dışa aktarma başarısız"
+	},
+	"addColumn": {
+		"title": "Sütun ekle",
+		"description": "Yeni sütunlar tablonun sonuna eklenir.",
+		"name": "Ad",
+		"namePlaceholder": "column_name",
+		"duplicate": "Bu adda bir sütun zaten var.",
+		"type": "Tür",
+		"submit": "Sütun ekle"
+	},
+	"dataEditor": {
+		"pendingChange": "{count} bekleyen değişiklik",
+		"pendingChanges": "{count} bekleyen değişiklik",
+		"saved": "kaydedildi",
+		"undo": "Geri al",
+		"redo": "Yinele",
+		"addRow": "Satır ekle",
+		"addColumn": "Sütun ekle",
+		"discard": "Vazgeç",
+		"saveFirst": "Önce değişiklikleri kaydedin",
+		"downloadTable": "Tabloyu indir",
+		"close": "Düzenleyiciyi kapat",
+		"errorTitle": "Tablo güncellenemedi",
+		"loading": "Tablo yükleniyor",
+		"noColumns": "Düzenlenecek sütun yok",
+		"selectAll": "Tüm satırları seç",
+		"selectRow": "Satırı seç",
+		"deleteRow": "Satırı sil",
+		"renameHint": "Yeniden adlandırmak için çift tıklayın",
+		"editHint": "Düzenlemek için bir hücreye çift tıklayın veya ok tuşlarıyla gezinip Enter'a basın.",
+		"editorHint": "Burası düzenleyici. Sıralamak, filtrelemek, istatistik görmek veya satırları dışa aktarmak için yukarıdaki SQL kutusunda sorgu çalıştırın.",
+		"truncated": "{total} satırın ilk {shown} tanesi gösteriliyor. Yalnızca yüklenen satırlar düzenlenebilir.",
+		"sqliteNote": "Tarayıcı motoru SQLite dosyası yazamadığı için SQLite CSV olarak indirilir."
+	},
+	"tableExplorer": {
+		"empty": "Yüklü tablo yok",
+		"expand": "Sütunları genişlet",
+		"collapse": "Sütunları daralt",
+		"preview": "Bu tabloyu önizle"
+	},
+	"page": {
+		"engineError": "Motor hatası",
+		"unsupportedFiles": "Desteklenmeyen dosyalar",
+		"confirmReset": "Veritabanındaki tüm tablolar silinsin mi? Bu işlem geri alınamaz."
+	},
+	"shortcuts": {
+		"title": "Klavye kısayolları",
+		"description": "Klavyeden ayrılmadan çalışın.",
+		"group": {
+			"query": "Sorgu",
+			"data": "Veri",
+			"results": "Sonuçlar",
+			"general": "Genel"
+		},
+		"runQuery": "Sorgu çalıştır",
+		"focusEditor": "SQL düzenleyiciye odaklan",
+		"openFiles": "Dosyaları aç",
+		"focusFiles": "Dosya filtresine odaklan",
+		"focusFilter": "Satır filtresine odaklan",
+		"undoEdit": "Düzenlemeyi geri al",
+		"redoEdit": "Düzenlemeyi yinele",
+		"showShortcuts": "Kısayolları göster",
+		"blurField": "Etkin alanın odağını kaldır"
+	},
+	"errors": {
+		"unsupportedFileType": "desteklenmeyen dosya türü",
+		"unsupportedFileKind": "desteklenmeyen dosya türü: {kind}",
+		"engineNotInitialized": "veritabanı motoru başlatılmadı",
+		"notSessionArchive": "bu zip bir oturum arşivi değil",
+		"unreadableManifest": "oturum bildirimi okunamıyor",
+		"notZip": "zip arşivi değil",
+		"corruptZip": "bozuk zip dizini",
+		"unsupportedCompression": "desteklenmeyen zip sıkıştırma yöntemi: {method}",
+		"workerBundle": "duckdb çalışan paketi mevcut değil"
+	}
+}

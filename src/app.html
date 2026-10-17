@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+		<meta name="text-scale" content="scale" />
+		<meta name="color-scheme" content="light dark" />
+		<script>
+			(() => {
+				try {
+					const stored = localStorage.getItem('tabler.theme');
+					const dark =
+						stored === 'dark' ||
+						(stored !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches);
+					document.documentElement.classList.toggle('dark', dark);
+				} catch {
+					// storage unavailable, fall back to light
+				}
+			})();
+		</script>
+		<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)" />
+		<link rel="icon" type="image/png" href="https://cdn.fatih.live/logo.png" />
+		<link rel="apple-touch-icon" href="https://cdn.fatih.live/logo.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+		<link rel="preconnect" href="https://cdn.fatih.live" crossorigin />
+		<title>Tabler · Fatih Yılmaz</title>
+		<meta name="application-name" content="Tabler" />
+		<meta name="author" content="Fatih Yılmaz" />
+		<meta name="publisher" content="Fatih Yılmaz" />
+		<meta
+			name="description"
+			content="Query CSV, Excel, Parquet and JSON files with SQL directly in your browser. Tabler runs DuckDB in-browser, so your data never leaves your device. No signup, no upload."
+		/>
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+		<meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1" />
+		<link rel="canonical" href="https://fatih.live/" />
+		<link rel="author" href="https://fatih.live/" />
+		<link rel="me" href="https://github.com/queaxtra" />
+		<link rel="alternate" hreflang="en" href="https://fatih.live/" />
+		<link rel="alternate" hreflang="x-default" href="https://fatih.live/" />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="Tabler" />
+		<meta property="og:title" content="Tabler · Fatih Yılmaz" />
+		<meta
+			property="og:description"
+			content="Query CSV, Excel, Parquet and JSON files with SQL directly in your browser. Tabler runs DuckDB in-browser, so your data never leaves your device. No signup, no upload."
+		/>
+		<meta property="og:url" content="https://fatih.live/" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:image" content="https://cdn.fatih.live/tabler-banner.png" />
+		<meta property="og:image:type" content="image/png" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="Tabler, in-browser SQL query tool" />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content="Tabler · Fatih Yılmaz" />
+		<meta
+			name="twitter:description"
+			content="Query CSV, Excel, Parquet and JSON files with SQL directly in your browser. Tabler runs DuckDB in-browser, so your data never leaves your device. No signup, no upload."
+		/>
+		<meta name="twitter:image" content="https://cdn.fatih.live/tabler-banner.png" />
+		<meta name="twitter:image:alt" content="Tabler, in-browser SQL query tool" />
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@graph": [
+					{
+						"@type": "WebApplication",
+						"@id": "https://fatih.live/#app",
+						"name": "Tabler",
+						"url": "https://fatih.live/",
+						"image": "https://cdn.fatih.live/tabler-banner.png",
+						"description": "Query CSV, Excel, Parquet and JSON files with SQL directly in your browser. Tabler runs DuckDB in-browser, so your data never leaves your device.",
+						"applicationCategory": "DeveloperApplication",
+						"operatingSystem": "Any modern web browser",
+						"browserRequirements": "Requires JavaScript and WebAssembly",
+						"isAccessibleForFree": true,
+						"offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+						"featureList": [
+							"Query CSV, Excel, Parquet and JSON with SQL",
+							"Runs entirely in the browser",
+							"No signup or upload",
+							"Export and import sessions",
+							"Schema inspection and editing"
+						],
+						"codeRepository": "https://github.com/queaxtra/tabler",
+						"author": { "@id": "https://fatih.live/#person" },
+						"creator": { "@id": "https://fatih.live/#person" },
+						"publisher": { "@id": "https://fatih.live/#person" }
+					},
+					{
+						"@type": "Person",
+						"@id": "https://fatih.live/#person",
+						"name": "Fatih Yılmaz",
+						"url": "https://fatih.live/",
+						"sameAs": ["https://github.com/queaxtra"]
+					},
+					{
+						"@type": "WebSite",
+						"@id": "https://fatih.live/#website",
+						"url": "https://fatih.live/",
+						"name": "Tabler",
+						"inLanguage": "en",
+						"publisher": { "@id": "https://fatih.live/#person" }
+					}
+				]
+			}
+		</script>
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>
