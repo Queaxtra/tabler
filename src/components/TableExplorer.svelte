@@ -5,10 +5,8 @@
 	import { cn } from '../lib/utils.js';
 	import type { TableSchema } from '../lib/db/types.js';
 
-	let {
-		tables,
-		onselect
-	}: { tables: TableSchema[]; onselect: (table: TableSchema) => void } = $props();
+	let { tables, onselect }: { tables: TableSchema[]; onselect: (table: TableSchema) => void } =
+		$props();
 
 	let expanded = $state<Record<string, boolean>>({});
 

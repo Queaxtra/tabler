@@ -10,7 +10,13 @@ export const SHORTCUTS: ShortcutDefinition[] = [
 		allowInInput: true
 	},
 	{ id: 'focus-editor', combo: 'mod+e', label: 'shortcuts.focusEditor', group: 'query' },
-	{ id: 'open-files', combo: 'mod+o', label: 'shortcuts.openFiles', group: 'data', allowInInput: true },
+	{
+		id: 'open-files',
+		combo: 'mod+o',
+		label: 'shortcuts.openFiles',
+		group: 'data',
+		allowInInput: true
+	},
 	{
 		id: 'focus-files',
 		combo: 'mod+shift+f',

@@ -44,7 +44,10 @@
 		</Button>
 
 		<Select.Root type="single" bind:value={$locale}>
-			<Select.Trigger class="h-8 w-8 !justify-center border-transparent bg-transparent px-0 shadow-none hover:bg-accent dark:bg-transparent dark:hover:bg-accent [&>svg:last-child]:hidden" aria-label={$t('hero.language')}>
+			<Select.Trigger
+				class="h-8 w-8 !justify-center border-transparent bg-transparent px-0 shadow-none hover:bg-accent dark:bg-transparent dark:hover:bg-accent [&>svg:last-child]:hidden"
+				aria-label={$t('hero.language')}
+			>
 				<GlobeIcon />
 			</Select.Trigger>
 			<Select.Content>

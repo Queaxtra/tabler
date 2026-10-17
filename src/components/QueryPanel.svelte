@@ -122,12 +122,7 @@
 
 		{#if editing && engine}
 			{#key editing.table}
-				<DataEditor
-					{engine}
-					target={editing}
-					onclose={oncloseeditor}
-					onchanged={onschemachanged}
-				/>
+				<DataEditor {engine} target={editing} onclose={oncloseeditor} onchanged={onschemachanged} />
 			{/key}
 		{:else}
 			<ResultGrid

@@ -479,7 +479,7 @@
 						</Table.Head>
 
 						{#each editor.columns as column, index (index)}
-							<Table.Head class="sticky top-0 z-10 whitespace-nowrap bg-background">
+							<Table.Head class="sticky top-0 z-10 bg-background whitespace-nowrap">
 								{#if header === index}
 									<input
 										class="h-6 w-full min-w-24 border border-input bg-background px-1 font-mono text-xs outline-none"
@@ -542,8 +542,7 @@
 												bind:value={cellDraft}
 												use:focusCell
 												onblur={commitCell}
-												onkeydown={(event) => handleCellKey(event, true)}
-											></textarea>
+												onkeydown={(event) => handleCellKey(event, true)}></textarea>
 										{:else}
 											<input
 												class="h-6 w-full min-w-28 border border-input bg-background px-1 font-mono text-xs outline-none"
@@ -556,7 +555,8 @@
 									{:else if value === null}
 										<span class="text-muted-foreground">{$t('common.null')}</span>
 									{:else if isMultiline(value)}
-										<pre class="max-h-[480px] w-full overflow-auto text-xs whitespace-pre">{value}</pre>
+										<pre
+											class="max-h-[480px] w-full overflow-auto text-xs whitespace-pre">{value}</pre>
 									{:else}
 										{value}
 									{/if}

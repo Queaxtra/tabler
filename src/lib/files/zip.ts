@@ -128,7 +128,8 @@ async function unpack(
 ): Promise<Uint8Array> {
 	const raw = bytes.slice(start, start + size);
 	if (method === METHOD_STORED) return raw;
-	if (method !== METHOD_DEFLATED) throw new Error(translate('errors.unsupportedCompression', { method }));
+	if (method !== METHOD_DEFLATED)
+		throw new Error(translate('errors.unsupportedCompression', { method }));
 
 	const stream = new Blob([raw]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
 	return new Uint8Array(await new Response(stream).arrayBuffer());

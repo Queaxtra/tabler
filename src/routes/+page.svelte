@@ -136,7 +136,13 @@
 				const created = await active.load(source);
 				loadedFiles = [
 					...loadedFiles,
-					{ id: source.id, name: source.name, kind: source.kind, size: source.size, tables: created }
+					{
+						id: source.id,
+						name: source.name,
+						kind: source.kind,
+						size: source.size,
+						tables: created
+					}
 				];
 				activeFileId = source.id;
 			}
@@ -233,7 +239,8 @@
 	// right-click "Run query": fill the editor with a preview of the file and run it
 	function runFileQuery(file: LoadedSource) {
 		activeFileId = file.id;
-		const qualified = tables.find((table) => table.name === file.tables[0])?.qualified ?? file.tables[0];
+		const qualified =
+			tables.find((table) => table.name === file.tables[0])?.qualified ?? file.tables[0];
 		if (!qualified) return;
 
 		editing = null;
@@ -322,9 +329,7 @@
 	}
 </script>
 
-<div
-	class="flex min-h-[100dvh] flex-col bg-background lg:h-[100dvh] lg:min-h-0 lg:overflow-hidden"
->
+<div class="flex min-h-[100dvh] flex-col bg-background lg:h-[100dvh] lg:min-h-0 lg:overflow-hidden">
 	<Hero onshortcuts={openShortcuts} />
 
 	{#if engineError || rejectionMessage}

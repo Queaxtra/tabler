@@ -275,7 +275,7 @@
 							{#each result.columns as column, index (index)}
 								{@const sort = sortOf(column.name)}
 								{@const filtered = filterValue(column.name) !== ''}
-								<Table.Head class="sticky top-0 z-10 align-top whitespace-nowrap bg-background">
+								<Table.Head class="sticky top-0 z-10 bg-background align-top whitespace-nowrap">
 									<div class="flex flex-col gap-1">
 										<div class="flex items-center gap-1">
 											<button
@@ -340,18 +340,19 @@
 
 					<Table.Body>
 						{#each rows as row, rowIndex (rowIndex)}
-							<Table.Row
-								class="cursor-pointer"
-								onclick={() => openDetail(rowIndex)}
-							>
+							<Table.Row class="cursor-pointer" onclick={() => openDetail(rowIndex)}>
 								{#each row as cell, cellIndex (cellIndex)}
 									<Table.Cell
-										class={cn('font-mono text-xs', isJson(cell) ? 'align-top' : 'whitespace-nowrap')}
+										class={cn(
+											'font-mono text-xs',
+											isJson(cell) ? 'align-top' : 'whitespace-nowrap'
+										)}
 									>
 										{#if cell === null}
 											<span class="text-muted-foreground">{$t('common.null')}</span>
 										{:else if isJson(cell)}
-											<pre class="max-h-[480px] w-full overflow-auto text-xs whitespace-pre">{cell}</pre>
+											<pre
+												class="max-h-[480px] w-full overflow-auto text-xs whitespace-pre">{cell}</pre>
 										{:else}
 											{cell}
 										{/if}
@@ -381,7 +382,9 @@
 <Dialog.Root bind:open={detailOpen}>
 	<Dialog.Content class="sm:max-w-lg">
 		<Dialog.Header>
-			<Dialog.Title>{$t('results.rowTitle', { number: detail !== null ? detail + 1 : '' })}</Dialog.Title>
+			<Dialog.Title
+				>{$t('results.rowTitle', { number: detail !== null ? detail + 1 : '' })}</Dialog.Title
+			>
 			<Dialog.Description>{$t('results.rowDescription')}</Dialog.Description>
 		</Dialog.Header>
 
@@ -394,9 +397,10 @@
 							{#if entry.value === null}
 								<span class="text-sm text-muted-foreground">{$t('common.null')}</span>
 							{:else if isJson(entry.value)}
-								<pre class="max-h-60 overflow-auto font-mono text-xs whitespace-pre">{entry.value}</pre>
+								<pre
+									class="max-h-60 overflow-auto font-mono text-xs whitespace-pre">{entry.value}</pre>
 							{:else}
-								<span class="break-words font-mono text-xs">{entry.value}</span>
+								<span class="font-mono text-xs break-words">{entry.value}</span>
 							{/if}
 						</dd>
 					</div>

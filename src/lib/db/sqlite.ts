@@ -73,7 +73,9 @@ async function materialize(
 
 	if (table.rows.length === 0) {
 		// ponytail: an empty sqlite table carries no values to infer from, so every column becomes varchar
-		const definition = table.columns.map((column) => `${quoteIdentifier(column)} VARCHAR`).join(', ');
+		const definition = table.columns
+			.map((column) => `${quoteIdentifier(column)} VARCHAR`)
+			.join(', ');
 		await connection.query(`CREATE OR REPLACE TABLE ${target} (${definition || 'value VARCHAR'})`);
 		return;
 	}

@@ -36,7 +36,10 @@ function initialLocale(): string {
 }
 
 function lookup(locale: string, key: string): string | undefined {
-	const dictionary = (dictionaries[locale] ?? dictionaries[DEFAULT_LOCALE]) as Record<string, unknown>;
+	const dictionary = (dictionaries[locale] ?? dictionaries[DEFAULT_LOCALE]) as Record<
+		string,
+		unknown
+	>;
 	let node: unknown = dictionary;
 	for (const part of key.split('.')) {
 		if (typeof node !== 'object' || node === null) return undefined;

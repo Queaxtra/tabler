@@ -49,13 +49,16 @@ export function emptyEditor(): EditorState {
 	};
 }
 
-export function applySnapshot(state: EditorState, snapshot: {
-	columns: string[];
-	types: string[];
-	rows: EditableRow[];
-	rowCount: number;
-	truncated: boolean;
-}): void {
+export function applySnapshot(
+	state: EditorState,
+	snapshot: {
+		columns: string[];
+		types: string[];
+		rows: EditableRow[];
+		rowCount: number;
+		truncated: boolean;
+	}
+): void {
 	state.columns = snapshot.columns;
 	state.types = snapshot.types;
 	state.origins = [...snapshot.columns];
@@ -123,7 +126,11 @@ export function countChanges(state: EditorState, baseline: Baseline): number {
 	return count;
 }
 
-export function buildEditPayload(table: string, state: EditorState, baseline: Baseline): EditPayload {
+export function buildEditPayload(
+	table: string,
+	state: EditorState,
+	baseline: Baseline
+): EditPayload {
 	const updates: EditPayload['updates'] = [];
 	for (const row of state.rows) {
 		if (row.isNew) continue;

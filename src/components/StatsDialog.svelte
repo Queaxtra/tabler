@@ -44,7 +44,7 @@
 					<Table.Header>
 						<Table.Row>
 							{#each result.columns as column, index (index)}
-								<Table.Head class="sticky top-0 z-10 whitespace-nowrap bg-background">
+								<Table.Head class="sticky top-0 z-10 bg-background whitespace-nowrap">
 									{column.name}
 								</Table.Head>
 							{/each}
@@ -54,7 +54,7 @@
 						{#each result.rows as row, rowIndex (rowIndex)}
 							<Table.Row>
 								{#each row as cell, cellIndex (cellIndex)}
-									<Table.Cell class="whitespace-nowrap font-mono text-xs">
+									<Table.Cell class="font-mono text-xs whitespace-nowrap">
 										{#if cell === null}
 											<span class="text-muted-foreground">{$t('common.null')}</span>
 										{:else}
