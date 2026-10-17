@@ -1,9 +1,16 @@
 import * as duckdb from '@duckdb/duckdb-wasm';
+import * as XLSX from 'xlsx';
 import type { AsyncDuckDB, AsyncDuckDBConnection } from '@duckdb/duckdb-wasm';
 import { formatCell } from './format.js';
 import { instantiateDatabase } from './duckdb.js';
 import { loadSqliteDatabase } from './sqlite.js';
-import { quoteIdentifier, quoteLiteral, stripTrailingLimit, toObjectName, uniqueName } from './sql.js';
+import {
+	quoteIdentifier,
+	quoteLiteral,
+	stripTrailingLimit,
+	toObjectName,
+	uniqueName
+} from './sql.js';
 import { parseColumns, parseTables } from '#lib/schema/parse.js';
 import { createZip, readZip, type ZipEntry } from '#lib/files/zip.js';
 import { translate } from '../i18n/index.js';
@@ -37,14 +44,24 @@ interface ExportFormat {
 // one export recipe per source format, sqlite falls back to csv because wasm cannot write the file
 const EXPORT_FORMATS: Record<FileKind, ExportFormat> = {
 	csv: { extension: 'csv', mime: 'text/csv', options: "(FORMAT CSV, HEADER, DELIMITER ',')" },
-	tsv: { extension: 'tsv', mime: 'text/tab-separated-values', options: "(FORMAT CSV, HEADER, DELIMITER '\t')" },
+	tsv: {
+		extension: 'tsv',
+		mime: 'text/tab-separated-values',
+		options: "(FORMAT CSV, HEADER, DELIMITER '\t')"
+	},
 	json: { extension: 'json', mime: 'application/json', options: '(FORMAT JSON, ARRAY true)' },
 	parquet: {
 		extension: 'parquet',
 		mime: 'application/octet-stream',
 		options: '(FORMAT PARQUET, COMPRESSION zstd)'
 	},
-	sqlite: { extension: 'csv', mime: 'text/csv', options: "(FORMAT CSV, HEADER, DELIMITER ',')" }
+	sqlite: { extension: 'csv', mime: 'text/csv', options: "(FORMAT CSV, HEADER, DELIMITER ',')" },
+	xlsx: {
+		extension: 'xlsx',
+		mime: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+		options: '(FORMAT xlsx, HEADER true)'
+	},
+	xls: { extension: 'csv', mime: 'text/csv', options: "(FORMAT CSV, HEADER, DELIMITER ',')" }
 };
 
 // formats offered when exporting a query result, spreadsheet needs the excel extension at runtime
@@ -59,7 +76,7 @@ const QUERY_EXPORT_FORMATS: Record<ExportFormatKey, ExportFormat> = {
 	xlsx: {
 		extension: 'xlsx',
 		mime: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-		options: '(FORMAT xlsx)'
+		options: '(FORMAT xlsx, HEADER true)'
 	}
 };
 
@@ -70,6 +87,27 @@ function toSqlLiteral(value: CellValue, type: string | undefined): string {
 	const text = quoteLiteral(value);
 	const complex = !type || /[[(<]/.test(type);
 	return complex ? text : `CAST(${text} AS ${type})`;
+}
+
+// ponytail: the excel extension returns its spreadsheet one byte off in duckdb-wasm, so the zip signature
+// sits behind junk that excel and unzip reject; drop it and drop this helper once the extension is fixed
+function trimZipPrefix(buffer: Uint8Array): Uint8Array {
+	for (let index = 0; index < 8; index += 1) {
+		if (
+			buffer[index] === 0x50 &&
+			buffer[index + 1] === 0x4b &&
+			buffer[index + 2] === 0x03 &&
+			buffer[index + 3] === 0x04
+		) {
+			return buffer.subarray(index);
+		}
+	}
+	return buffer;
+}
+
+function exportBlob(format: ExportFormat, buffer: Uint8Array): Blob {
+	const bytes = format.extension === 'xlsx' ? trimZipPrefix(buffer) : buffer;
+	return new Blob([bytes as BlobPart], { type: format.mime });
 }
 
 export class QueryEngine {
@@ -94,6 +132,20 @@ export class QueryEngine {
 
 		if (source.kind === 'sqlite') {
 			return loadSqliteDatabase(db, connection, source, this.tableNames);
+		}
+
+		if (source.kind === 'xls') {
+			const buffer = await source.file.arrayBuffer();
+			const workbook = XLSX.read(buffer, { type: 'array' });
+			const sheet = workbook.Sheets[workbook.SheetNames[0]];
+			const csv = XLSX.utils.sheet_to_csv(sheet);
+			const file = new File([csv], source.name.replace(/\.xls$/i, '.csv'), { type: 'text/csv' });
+			const converted: SourceFile = { ...source, kind: 'csv', name: file.name, file };
+			return this.load(converted);
+		}
+
+		if (source.kind === 'xlsx') {
+			await connection.query('INSTALL excel; LOAD excel;');
 		}
 
 		const path = await this.registerFile(db, source);
@@ -208,7 +260,9 @@ export class QueryEngine {
 			}
 
 			for (const values of payload.inserts) {
-				const list = values.map((value, index) => toSqlLiteral(value, payload.types[index])).join(', ');
+				const list = values
+					.map((value, index) => toSqlLiteral(value, payload.types[index]))
+					.join(', ');
 				await connection.query(`INSERT INTO ${payload.table} VALUES (${list})`);
 			}
 
@@ -226,12 +280,16 @@ export class QueryEngine {
 		const format = EXPORT_FORMATS[kind];
 		const path = `export_${(this.exportSequence += 1)}.${format.extension}`;
 
+		if (kind === 'xlsx') {
+			await connection.query('INSTALL excel; LOAD excel;');
+		}
+
 		await connection.query(`COPY ${qualified} TO ${quoteLiteral(path)} ${format.options}`);
 		const buffer = await db.copyFileToBuffer(path);
 		await db.dropFile(path);
 
 		return {
-			blob: new Blob([buffer as BlobPart], { type: format.mime }),
+			blob: exportBlob(format, buffer),
 			filename: `${baseName}.${format.extension}`
 		};
 	}
@@ -247,12 +305,14 @@ export class QueryEngine {
 			await connection.query('INSTALL excel; LOAD excel;');
 		}
 
-		await connection.query(`COPY (${stripTrailingLimit(sql)}) TO ${quoteLiteral(path)} ${spec.options}`);
+		await connection.query(
+			`COPY (${stripTrailingLimit(sql)}) TO ${quoteLiteral(path)} ${spec.options}`
+		);
 		const buffer = await db.copyFileToBuffer(path);
 		await db.dropFile(path);
 
 		return {
-			blob: new Blob([buffer as BlobPart], { type: spec.mime }),
+			blob: exportBlob(spec, buffer),
 			filename: `${baseName}.${spec.extension}`
 		};
 	}
@@ -399,6 +459,8 @@ export class QueryEngine {
 				return `read_json_auto(${target})`;
 			case 'parquet':
 				return `read_parquet(${target})`;
+			case 'xlsx':
+				return `read_xlsx(${target}, header = true)`;
 			default:
 				throw new Error(translate('errors.unsupportedFileKind', { kind: source.kind }));
 		}
@@ -430,7 +492,10 @@ export class QueryEngine {
 		}
 	}
 
-	private async countRows(connection: AsyncDuckDBConnection, qualified: string): Promise<number | null> {
+	private async countRows(
+		connection: AsyncDuckDBConnection,
+		qualified: string
+	): Promise<number | null> {
 		// ponytail: counts are informational, a failing count just hides the row count
 		try {
 			const result = await this.queryOn(connection, `SELECT count(*) AS count FROM ${qualified}`);

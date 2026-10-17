@@ -60,7 +60,9 @@
 		tsv: TableIcon,
 		json: CodeIcon,
 		parquet: LayersIcon,
-		sqlite: DatabaseIcon
+		sqlite: DatabaseIcon,
+		xlsx: TableIcon,
+		xls: TableIcon
 	};
 
 	let filter = $state('');
@@ -113,7 +115,7 @@
 
 <aside class="flex min-h-0 flex-col border-b border-border lg:border-r lg:border-b-0">
 	<div class="flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto p-4">
-		<DropZone disabled={disabled} {busy} {onfiles} />
+		<DropZone {disabled} {busy} {onfiles} />
 
 		<div class="flex flex-col gap-2">
 			<Button
@@ -176,29 +178,29 @@
 
 				<div class="sticky top-0 z-10 -mx-1 bg-background/80 px-1 py-1 backdrop-blur">
 					<InputGroup.Root>
-					<InputGroup.Input
-						bind:ref={filterInput}
-						bind:value={filter}
-						placeholder={$t('sources.filterPlaceholder')}
-						aria-label={$t('sources.filterPlaceholder')}
-					/>
-					<InputGroup.Addon>
-						<MagnifierIcon class="text-muted-foreground" />
-					</InputGroup.Addon>
-					<InputGroup.Addon align="inline-end">
-						{#if filter}
-							<InputGroup.Button
-								size="icon-xs"
-								aria-label={$t('sources.clearFilter')}
-								onclick={clearFilter}
-							>
-								<XIcon />
-							</InputGroup.Button>
-						{:else}
-							<ShortcutKeys combo="mod+shift+f" />
-						{/if}
-					</InputGroup.Addon>
-				</InputGroup.Root>
+						<InputGroup.Input
+							bind:ref={filterInput}
+							bind:value={filter}
+							placeholder={$t('sources.filterPlaceholder')}
+							aria-label={$t('sources.filterPlaceholder')}
+						/>
+						<InputGroup.Addon>
+							<MagnifierIcon class="text-muted-foreground" />
+						</InputGroup.Addon>
+						<InputGroup.Addon align="inline-end">
+							{#if filter}
+								<InputGroup.Button
+									size="icon-xs"
+									aria-label={$t('sources.clearFilter')}
+									onclick={clearFilter}
+								>
+									<XIcon />
+								</InputGroup.Button>
+							{:else}
+								<ShortcutKeys combo="mod+shift+f" />
+							{/if}
+						</InputGroup.Addon>
+					</InputGroup.Root>
 				</div>
 
 				{#if visibleFiles.length === 0}

@@ -12,7 +12,9 @@ export const FILE_TYPES: FileTypeRule[] = [
 	{ kind: 'parquet', label: 'Parquet', extensions: ['parquet'] },
 	{ kind: 'csv', label: 'CSV', extensions: ['csv'] },
 	{ kind: 'tsv', label: 'TSV', extensions: ['tsv'] },
-	{ kind: 'json', label: 'JSON', extensions: ['json', 'ndjson', 'jsonl'] }
+	{ kind: 'json', label: 'JSON', extensions: ['json', 'ndjson', 'jsonl'] },
+	{ kind: 'xlsx', label: 'Excel', extensions: ['xlsx'] },
+	{ kind: 'xls', label: 'Excel (xls)', extensions: ['xls'] }
 ];
 
 export const ACCEPT_ATTRIBUTE = FILE_TYPES.flatMap((rule) =>

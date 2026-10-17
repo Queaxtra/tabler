@@ -1,4 +1,4 @@
-export type FileKind = 'csv' | 'tsv' | 'json' | 'parquet' | 'sqlite';
+export type FileKind = 'csv' | 'tsv' | 'json' | 'parquet' | 'sqlite' | 'xlsx' | 'xls';
 
 export interface SourceFile {
 	id: string;

@@ -64,6 +64,7 @@
 		"@duckdb/duckdb-wasm": "1.33.1-dev65.0",
 		"@sveltejs/adapter-cloudflare": "^8.0.1",
 		"apache-arrow": "17.0.0",
-		"sql.js": "^1.14.2"
+		"sql.js": "^1.14.2",
+		"xlsx": "^0.18.5"
 	}
 }
