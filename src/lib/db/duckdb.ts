@@ -1,14 +1,17 @@
 import * as duckdb from '@duckdb/duckdb-wasm';
 import type { AsyncDuckDB, DuckDBBundles } from '@duckdb/duckdb-wasm';
 import { translate } from '../i18n/index.js';
-import duckdbEhWasm from '@duckdb/duckdb-wasm/dist/duckdb-eh.wasm?url';
-import duckdbMvpWasm from '@duckdb/duckdb-wasm/dist/duckdb-mvp.wasm?url';
 import ehWorker from '@duckdb/duckdb-wasm/dist/duckdb-browser-eh.worker.js?url';
 import mvpWorker from '@duckdb/duckdb-wasm/dist/duckdb-browser-mvp.worker.js?url';
 
+// the wasm binaries are 34 MiB and 39 MiB, above the 25 MiB per file limit Cloudflare enforces on
+// uploaded assets, so they are fetched from the jsdelivr CDN at runtime instead of being bundled
+// the workers stay local so they are served same-origin
+const CDN = duckdb.getJsDelivrBundles();
+
 const BUNDLES: DuckDBBundles = {
-	mvp: { mainModule: duckdbMvpWasm, mainWorker: mvpWorker },
-	eh: { mainModule: duckdbEhWasm, mainWorker: ehWorker }
+	mvp: { mainModule: CDN.mvp!.mainModule, mainWorker: mvpWorker },
+	eh: { mainModule: CDN.eh!.mainModule, mainWorker: ehWorker }
 };
 
 const QUERY_CONFIG = {
